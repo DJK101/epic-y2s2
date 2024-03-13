@@ -11,12 +11,16 @@ export default function SignUp() {
     dob: "",
     admin: false,
   });
+  const [toastDetails, setToastDetails] = useState<ToastDetails>(
+    {
+      title: '',
+      content: '',
+      style: '',
+    }
+  )
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [toastTitle, setToastTitle] = useState("");
-  const [toastContent, setToastContent] = useState("");
-  const [toastStyle, setToastStyle] = useState("");
 
   const clearForm = () => {
     setNewUser({
@@ -48,32 +52,35 @@ export default function SignUp() {
     return users.some((user) => user.email === newUser.email);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (newUser.password !== confirmPassword) {
-      setToastTitle("An Error Occured!");
-      setToastContent("Passwords do not match");
-      setToastStyle("danger");
+      setToastDetails({
+        title: "An Error Occured!",
+        content: "Passwords do not match",
+        style: "danger",
+      });
       setShowToast(true);
       return;
     }
 
     if (userExists()) {
-      setToastTitle("An Error Occured!");
-      setToastContent(
-        "Account with email '" + newUser.email + "' already exists"
-      );
-      setToastStyle("danger");
+      setToastDetails({
+        title: "An Error Occured!",
+        content: "User with email '" + newUser.email + "' already exists",
+        style: "danger",
+      });
       setShowToast(true);
       return;
     }
 
     addUser();
-
-    setToastTitle("Success!");
-    setToastContent("User " + newUser.email + " registered successfully!");
-    setToastStyle("success");
+    setToastDetails({
+      title: "Success!",
+      content: "User " + newUser.email + " registered successfully!",
+      style: "success"
+    });
     setShowToast(true);
     clearForm();
   };
@@ -94,13 +101,13 @@ export default function SignUp() {
         show={showToast}
         delay={1200}
         autohide
-        bg={toastStyle}
+        bg={toastDetails.style}
       >
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">{toastTitle}</strong>
+          <strong className="me-auto">{toastDetails.title}</strong>
         </Toast.Header>
-        <Toast.Body>{toastContent}</Toast.Body>
+        <Toast.Body>{toastDetails.content}</Toast.Body>
       </Toast>
 
       <h2>Sign Up</h2>
@@ -187,7 +194,7 @@ export default function SignUp() {
         </Button>
 
         <p className="mt-3">
-          Already have an account? <Link to="/signup">Sign in</Link>
+          Already have an account? <Link to="/login">Sign in</Link>
         </p>
       </Form>
     </Container>
