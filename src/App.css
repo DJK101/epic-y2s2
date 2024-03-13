@@ -1,0 +1,14 @@
+/* Custom CSS to adjust the text color and opacity */
+.react-datetime-picker {
+  color: #000; /* Adjust the color as needed */
+}
+
+.react-datetime-picker .rdtPicker th,
+.react-datetime-picker .rdtPicker td,
+.react-datetime-picker .rdtPicker span,
+.react-datetime-picker .rdtPicker td.rdtDay,
+.react-datetime-picker .rdtPicker td.rdtDay:hover,
+.react-datetime-picker .rdtPicker td.rdtActive,
+.react-datetime-picker .rdtPicker td.rdtActive:hover {
+  color: #000; /* Adjust the color as needed */
+}
