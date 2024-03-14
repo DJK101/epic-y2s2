@@ -1,10 +1,22 @@
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import Pricing from "../pages/Pricing";
 import Leaderboard from "../pages/Leaderboard";
 import Login from "../pages/Login";
+import Pricing from "../pages/Pricing";
 import SignUp from "../pages/SignUp";
+import User from "../pages/User";
+import SearchBar from "./SearchBar";
+
+const currentUser = () => {
+  const userData = localStorage.getItem("currentUser");
+  if (userData) {
+    const user = JSON.parse(userData);
+    console.log(user);
+    return user;
+  }
+  return null;
+};
 
 export default function NavBar() {
   return (
@@ -33,29 +45,29 @@ export default function NavBar() {
               <Nav.Link as={Link} to={"/leaderboard"}>
                 Leaderboard
               </Nav.Link>
-              <Nav.Link as={Link} to={"/login"}>
-                Login
-              </Nav.Link>
+              {!currentUser() && (
+                <Nav.Link as={Link} to={"/login"}>
+                  Login
+                </Nav.Link>
+              )}
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Go</Button>
-            </Form>
+            {currentUser() && (
+              <Navbar.Text className="me-3">
+                Signed in as: <a href="/user">{currentUser().name}</a>
+              </Navbar.Text>
+            )}
+            <SearchBar />
           </Navbar.Collapse>
         </Container>
       </Navbar>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/user" element={<User />} />
+      </Routes>
     </BrowserRouter>
   );
 }
