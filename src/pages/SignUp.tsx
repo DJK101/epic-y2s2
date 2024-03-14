@@ -35,12 +35,10 @@ export default function SignUp() {
   };
 
   const addUser = () => {
-    const newUserr: User = newUser;
-
     const storedUsers = localStorage.getItem("users");
     const users: [User] = storedUsers ? JSON.parse(storedUsers) : [];
 
-    users.push(newUserr);
+    users.push(newUser);
 
     localStorage.setItem("users", JSON.stringify(users));
   };
@@ -104,7 +102,6 @@ export default function SignUp() {
         bg={toastDetails.style}
       >
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">{toastDetails.title}</strong>
         </Toast.Header>
         <Toast.Body>{toastDetails.content}</Toast.Body>

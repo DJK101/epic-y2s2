@@ -1,7 +1,11 @@
+import { Container, Row } from "react-bootstrap";
+
 export default function Pricing() {
   return (
-    <>
-      <h2>Pricing</h2>
-    </>
+    <Container>
+      <Row>
+        <h1>Pricing Text</h1>
+      </Row>
+    </Container>
   );
 }

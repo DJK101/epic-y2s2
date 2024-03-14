@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Form, Toast } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,6 +11,8 @@ export default function Login() {
     content: "",
     style: "",
   });
+
+  const navigate = useNavigate();
 
   const displayErrorToast = () => {
     setToastDetails({
@@ -37,12 +39,9 @@ export default function Login() {
       return;
     }
       localStorage.setItem("currentUser", JSON.stringify(submittedUser));
-      setToastDetails({
-        title: "Login Successful!",
-        content: "Logged in as " + submittedUser.name +"!",
-        style: "success",
-      });
-      setShowToast(true);
+      
+      navigate('/home');
+      window.location.reload();
   };
 
   return (
@@ -55,7 +54,6 @@ export default function Login() {
         bg={toastDetails.style}
       >
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">{toastDetails.title}</strong>
         </Toast.Header>
         <Toast.Body>{toastDetails.content}</Toast.Body>
@@ -63,7 +61,6 @@ export default function Login() {
 
       <h2>Sign In</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Label></Form.Label>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control

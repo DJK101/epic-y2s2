@@ -26,3 +26,8 @@ interface Page {
   content: string;
   link: string;
 }
+
+interface Score {
+  player: string;
+  score: number;
+}

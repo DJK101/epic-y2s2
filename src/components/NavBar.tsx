@@ -7,21 +7,12 @@ import Pricing from "../pages/Pricing";
 import SignUp from "../pages/SignUp";
 import User from "../pages/User";
 import SearchBar from "./SearchBar";
-
-const currentUser = () => {
-  const userData = localStorage.getItem("currentUser");
-  if (userData) {
-    const user = JSON.parse(userData);
-    console.log(user);
-    return user;
-  }
-  return null;
-};
+import CurrentUser from "../Utils";
 
 export default function NavBar() {
   return (
     <BrowserRouter>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-body-tertiary mb-5">
         <Container>
           <Navbar.Brand as={Link} to={"/home"}>
             <img
@@ -45,15 +36,15 @@ export default function NavBar() {
               <Nav.Link as={Link} to={"/leaderboard"}>
                 Leaderboard
               </Nav.Link>
-              {!currentUser() && (
+              {!CurrentUser() && (
                 <Nav.Link as={Link} to={"/login"}>
                   Login
                 </Nav.Link>
               )}
             </Nav>
-            {currentUser() && (
+            {CurrentUser() && (
               <Navbar.Text className="me-3">
-                Signed in as: <a href="/user">{currentUser().name}</a>
+                Signed in as: <a href="/user">{CurrentUser().name}</a>
               </Navbar.Text>
             )}
             <SearchBar />
