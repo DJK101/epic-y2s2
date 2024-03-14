@@ -20,3 +20,9 @@ interface ToastDetails {
     | "light"
     | "";
 }
+
+interface Page {
+  title: string;
+  content: string;
+  link: string;
+}
