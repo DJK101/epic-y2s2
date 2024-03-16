@@ -1,4 +1,5 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import image1 from "../assets/idle-game-poster.png";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
         <Row className="justify-content-center">
           <Col xs={12} md={6} lg={4} className="mb-4">
             <Card>
-              <Card.Img variant="top" src="./src/assets/idle-game-poster.png" />
+              <Card.Img variant="top" src={image1} />
               <Card.Body>
                 <Card.Title>Tycoon Power House</Card.Title>
                 <Card.Text>
