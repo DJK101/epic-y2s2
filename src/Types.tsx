@@ -31,3 +31,9 @@ interface Score {
   player: string;
   score: number;
 }
+
+interface Message {
+  author: string;
+  content: string;
+  timestamp: string;
+}

@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Leaderboard from "../pages/Leaderboard";
@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import User from "../pages/User";
 import SearchBar from "./SearchBar";
 import CurrentUser from "../Utils";
+import Chatroom from "../pages/Chatroom";
 
 export default function NavBar() {
   return (
@@ -36,16 +37,18 @@ export default function NavBar() {
               <Nav.Link as={Link} to={"/leaderboard"}>
                 Leaderboard
               </Nav.Link>
-              {!CurrentUser() && (
-                <Nav.Link as={Link} to={"/login"}>
-                  Login
-                </Nav.Link>
-              )}
+              <Nav.Link as={Link} to={"/chatroom"}>
+                Feedback
+              </Nav.Link>
             </Nav>
-            {CurrentUser() && (
+            {CurrentUser() ? (
               <Navbar.Text className="me-3">
                 Signed in as: <a href="/user">{CurrentUser().name}</a>
               </Navbar.Text>
+            ) : (
+              <Button href="/login" className="me-3">
+                Login
+              </Button>
             )}
             <SearchBar />
           </Navbar.Collapse>
@@ -55,6 +58,7 @@ export default function NavBar() {
         <Route path="/home" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/chatroom" element={<Chatroom />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/user" element={<User />} />

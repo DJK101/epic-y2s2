@@ -50,7 +50,7 @@ export default function SignUp() {
     return users.some((user) => user.email === newUser.email);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     if (newUser.password !== confirmPassword) {
@@ -83,8 +83,8 @@ export default function SignUp() {
     clearForm();
   };
 
-  const handleChange = (e: any, key: string) => {
-    const { value, type, checked } = e.target;
+  const handleChange = (event: any, key: string) => {
+    const { value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
     setNewUser((prevState) => ({
       ...prevState,
