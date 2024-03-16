@@ -129,7 +129,7 @@ export default function Leaderboard() {
         ) : (
           <Container>
             <Toast bg="warning" className="d-inline-block m-1 text-dark">
-              <Toast.Header>
+              <Toast.Header closeButton={false}>
                 <strong className="rounded me-auto">No Scores Found</strong>
               </Toast.Header>
               <Toast.Body>
