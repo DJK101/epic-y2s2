@@ -6,7 +6,7 @@ const pages: Page[] = [
   {
     title: "Home",
     content: "View details on the Arena Arcade, and why you should buy it",
-    link: "/home",
+    link: "/",
   },
   {
     title: "Pricing",
@@ -15,8 +15,18 @@ const pages: Page[] = [
   },
   {
     title: "Leaderboard",
-    content: "Keep up with who's dominating th Arena right now",
+    content: "Keep up with who's dominating the Arena right now",
     link: "/leaderboard",
+  },
+  {
+    title: "Feedback",
+    content: "Tell us how we're doing, or get help if you're having trouble",
+    link: "/chatroom",
+  },
+  {
+    title: "File Upload",
+    content: "Upload any files to our servers",
+    link: "/upload",
   },
 ];
 
