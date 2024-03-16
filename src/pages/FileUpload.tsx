@@ -12,10 +12,12 @@ export default function FileUpload() {
   const handleUpload = () => {
     setShowModal(true);
     setSelectedFile(false);
-    document.getElementById('custom-file').value = '';
   };
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+    window.location.reload();
+  };
 
   return (
     <Container className="py-5">
