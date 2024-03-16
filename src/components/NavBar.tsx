@@ -9,13 +9,14 @@ import User from "../pages/User";
 import SearchBar from "./SearchBar";
 import CurrentUser from "../Utils";
 import Chatroom from "../pages/Chatroom";
+import FileUpload from "../pages/FileUpload";
 
 export default function NavBar() {
   return (
     <BrowserRouter>
       <Navbar expand="lg" className="bg-body-tertiary mb-5">
         <Container>
-          <Navbar.Brand as={Link} to={"/home"}>
+          <Navbar.Brand as={Link} to={""}>
             <img
               alt=""
               src="/src/assets/arcade-arena-logo.svg"
@@ -28,7 +29,7 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to={"/home"}>
+              <Nav.Link as={Link} to={""}>
                 Home
               </Nav.Link>
               <Nav.Link as={Link} to={"/pricing"}>
@@ -39,6 +40,9 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link as={Link} to={"/chatroom"}>
                 Feedback
+              </Nav.Link>
+              <Nav.Link as={Link} to={"/upload"}>
+                File Upload
               </Nav.Link>
             </Nav>
             {CurrentUser() ? (
@@ -55,10 +59,11 @@ export default function NavBar() {
         </Container>
       </Navbar>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/chatroom" element={<Chatroom />} />
+        <Route path="/upload" element={<FileUpload />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/user" element={<User />} />
