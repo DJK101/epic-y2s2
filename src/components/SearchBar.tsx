@@ -72,6 +72,7 @@ export default function SearchBar() {
               </li>
             ))}
           </ul>
+          <Button variant="danger" onClick={() => setSearchResults([])}>Close</Button>
         </div>
       )}
     </div>
