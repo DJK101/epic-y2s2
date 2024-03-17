@@ -28,7 +28,7 @@ interface Page {
 }
 
 interface Score {
-  player: string;
+  name: string;
   score: number;
 }
 
