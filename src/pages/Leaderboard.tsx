@@ -18,16 +18,23 @@ import { useState } from "react";
 export default function Leaderboard() {
   const [newName, setNewName] = useState("");
   const [newScore, setNewScore] = useState(0);
+  const [reloadingFromDB, setReloadingFromDB] = useState(false);
 
-  function addPlayerScore() {
+  function addPlayerScore(name: string, score: number, refresh: boolean) {
     const playerScores: Score[] = getPlayerScores() ?? [];
-    playerScores.push({ player: newName, score: newScore });
+    const playerIfExists = playerScores.find((score) => score.name === name);
 
-    console.log(playerScores);
+    if (playerIfExists) {
+      const index = playerScores.indexOf(playerIfExists);
+      playerScores[index].score = score;
+    } else {
+      playerScores.push({ name: name, score: score });
+    }
 
     localStorage.setItem("playerScores", JSON.stringify(playerScores));
-
-    window.location.reload();
+    if (refresh) {
+      window.location.reload();
+    }
   }
 
   function getPlayerScores() {
@@ -44,7 +51,7 @@ export default function Leaderboard() {
     let playerScores: Score[] | null;
     if ((playerScores = getPlayerScores())) {
       const index = playerScores.findIndex(
-        (score) => score.player === playerName
+        (score) => score.name === playerName
       );
       playerScores.splice(index, 1);
 
@@ -53,11 +60,41 @@ export default function Leaderboard() {
     }
   }
 
+  function handleRefresh() {
+    setReloadingFromDB(true);
+
+    // instantiate a headers object
+    let myHeaders = new Headers();
+    // add content type header to object
+    myHeaders.append("Content-Type", "application/json");
+    // using built in JSON utility package turn object to string and store in a variable
+    // var raw = JSON.stringify({ base: base, exponent: exponent });
+    // create a JSON object with parameters for API call and store in a variable
+    let requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+    };
+    // make API call with parameters and use promises to get response
+    fetch(
+      "https://6arn48msfh.execute-api.eu-west-1.amazonaws.com/dev",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result).body)
+      .then((scores: Score[]) =>
+        scores.forEach((score) =>
+          addPlayerScore(score.name, score.score, false)
+        )
+      )
+      .then(() => setReloadingFromDB(false))
+      .catch((error) => console.log("error", error));
+  }
+
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">New Score</Popover.Header>
       <Popover.Body>
-        <Form onSubmit={() => addPlayerScore()}>
+        <Form onSubmit={() => addPlayerScore(newName, newScore, true)}>
           <Form.Group controlId="name">
             <Form.Control
               type="text"
@@ -95,7 +132,16 @@ export default function Leaderboard() {
           <h1>Global Leaderboard</h1>
         </Col>
         {CurrentUser() && CurrentUser().admin && (
-          <Col className="d-flex justify-content-end">
+          <Col className="d-flex justify-content-end p-1">
+            <Button
+              className="mx-2"
+              variant="info"
+              onClick={handleRefresh}
+              disabled={reloadingFromDB}
+            >
+              {reloadingFromDB ? "Refreshing..." : "Refresh From DB"}
+            </Button>
+
             <OverlayTrigger
               trigger="click"
               placement="bottom"
@@ -112,13 +158,13 @@ export default function Leaderboard() {
             <Card key={index} style={{ width: "18rem", margin: "0.5rem" }}>
               <CardBody>
                 <CardTitle>
-                  {index + 1}. {score.player}
+                  {index + 1}. {score.name}
                 </CardTitle>
                 <CardText>Score: {score.score}</CardText>
                 {CurrentUser() && CurrentUser().admin && (
                   <Button
                     variant="danger"
-                    onClick={() => removePlayerScore(score.player)}
+                    onClick={() => removePlayerScore(score.name)}
                   >
                     Remove
                   </Button>
