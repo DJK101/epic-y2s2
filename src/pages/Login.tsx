@@ -40,7 +40,7 @@ export default function Login() {
     }
       localStorage.setItem("currentUser", JSON.stringify(submittedUser));
       
-      navigate('/home');
+      navigate('/');
       window.location.reload();
   };
 
