@@ -125,7 +125,7 @@ export default function User() {
         ) : (
           <Container>
             <Toast bg="warning" className="d-inline-block m-1 text-dark">
-              <Toast.Header>
+              <Toast.Header closeButton={false}>
                 <strong className="rounded me-auto">No Other Users Found</strong>
               </Toast.Header>
               <Toast.Body>
