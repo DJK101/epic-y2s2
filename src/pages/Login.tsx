@@ -38,6 +38,7 @@ export default function Login() {
       displayErrorToast();
       return;
     }
+    
       localStorage.setItem("currentUser", JSON.stringify(submittedUser));
       
       navigate('/');
