@@ -1,4 +1,6 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import image1 from "../assets/game-controller.jpg";
+import image2 from "../assets/game-controller-combo.jpg";
 
 export default function Pricing() {
   return (
@@ -9,7 +11,7 @@ export default function Pricing() {
       <Row className="d-flex justify-content-around mt-4" xs={1} sm={1} md={2}>
         <Col>
           <Card className="p-0" border="secondary">
-            <Card.Img variant="top" src="./src/assets/game-controller.jpg" />
+            <Card.Img variant="top" src={image1} />
             <Card.Header>Single Console</Card.Header>
             <Card.Body>
               <Card.Title>1 Console for $40</Card.Title>
@@ -27,7 +29,7 @@ export default function Pricing() {
           <Card className="p-0" border="secondary">
             <Card.Img
               variant="top"
-              src="./src/assets/game-controller-combo.jpg"
+              src={image2}
             />
             <Card.Header>Friendship Deal</Card.Header>
             <Card.Body>

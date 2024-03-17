@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
 import CurrentUser from "../Utils";
 import Chatroom from "../pages/Chatroom";
 import FileUpload from "../pages/FileUpload";
+import logo from "../assets/arcade-arena-logo.svg"
 
 export default function NavBar() {
   return (
@@ -19,7 +20,7 @@ export default function NavBar() {
           <Navbar.Brand as={Link} to={""}>
             <img
               alt=""
-              src="/src/assets/arcade-arena-logo.svg"
+              src={logo}
               width="30"
               height="30"
               className="d-inline-block align-top"

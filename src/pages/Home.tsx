@@ -1,5 +1,7 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import image1 from "../assets/idle-game-poster.png";
+import image2 from "../assets/space-game-poster.png";
+import image3 from "../assets/pirate-game-poster.png";
 
 export default function Home() {
   return (
@@ -26,7 +28,7 @@ export default function Home() {
           </Col>
           <Col xs={12} md={6} lg={4} className="mb-4">
             <Card>
-              <Card.Img variant="top" src="./src/assets/space-game-poster.png" />
+              <Card.Img variant="top" src={image2} />
               <Card.Body>
                 <Card.Title>Galactic Rush</Card.Title>
                 <Card.Text>
@@ -41,7 +43,7 @@ export default function Home() {
           </Col>
           <Col xs={12} md={6} lg={4} className="mb-4">
             <Card>
-              <Card.Img variant="top" src="./src/assets/pirate-game-poster.png" />
+              <Card.Img variant="top" src={image3} />
               <Card.Body>
                 <Card.Title>Pirate's Plunder</Card.Title>
                 <Card.Text>
