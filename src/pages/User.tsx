@@ -126,10 +126,10 @@ export default function User() {
           <Container>
             <Toast bg="warning" className="d-inline-block m-1 text-dark">
               <Toast.Header>
-                <strong className="rounded me-auto">No Scores Found</strong>
+                <strong className="rounded me-auto">No Other Users Found</strong>
               </Toast.Header>
               <Toast.Body>
-                Sorry, no scores are currently available to be displayed
+                Sorry, no users are currently available to be displayed
               </Toast.Body>
             </Toast>
           </Container>
